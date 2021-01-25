@@ -24,6 +24,8 @@ v-if는 렌더링 했지만 보여주지 않을뿐
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data(){
     return {
@@ -51,12 +53,20 @@ export default {
   methods:{
     getData(){
       alert(this.input1);
+      this.getData2();
     },
     setData(){
       this.input1 = "12345";
     },
     changeRegion(){
       alert(this.region)
+    },
+    getData2: function(){
+      axios.get('https://pwmw.xyz:8085/api/v1/parcelOut/getParcelOutList?id=0')
+          .then(function(response){
+            alert(response);
+            console.log(response); // 객체 형태로 반환. 파싱작업 불필요
+          });
     }
 
   },
@@ -66,7 +76,6 @@ export default {
     }
   },
   beforeCreate() {
-
   },
   created() {
   },
