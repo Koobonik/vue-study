@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "./views/Home";
 import About from "./views/About";
-
+import Member from "./views/Member"
 Vue.use(VueRouter);
 const router = new VueRouter({
     mode: "history",
@@ -14,7 +14,11 @@ const router = new VueRouter({
         {
             path: "/about",
             component: About
-        }
+        },
+        {
+            path: "/member",
+            component: Member
+        },
     ]
 });
 
