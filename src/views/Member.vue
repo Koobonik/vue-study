@@ -1,9 +1,8 @@
 <template>
   <div id="member">
-    <div :key="i"  :v-for="(d,i) in members">
-      <b-card
-              title="Card Title"
-              img-src="https://picsum.photos/600/300/?image=25"
+      <b-card :key="index" :value="member.memberID"  v-for="(member,index) in members"
+              title="d.memberNickName"
+              img-src="d.memberImageUrl"
               img-alt="Image"
               img-top
               tag="article"
@@ -16,7 +15,6 @@
 
         <b-button href="#" variant="primary">Go somewhere</b-button>
       </b-card>
-    </div>
 
   </div>
 </template>
@@ -27,15 +25,19 @@ export default {
   name: "Member.vue",
   data(){
     return {
-      members: {
-        
-      }
+      members: []
     };
   },
   methods:{
     getData(){
       member.getMembers().then(response => {
         console.log(response.data);
+        this.members.push(response.data);
+        console.log(response.data.length);
+        for(let i = 0; i < response.data.length; i++){
+          this.members.push(JSON.stringify(response.data[i]));
+          console.log(this.members)
+        }
         // this.members = response.data;
       }).catch(error => {
         console.log(error);
@@ -45,6 +47,18 @@ export default {
   created() {
     this.getData();
   },
+}
+// eslint-disable-next-line no-unused-vars
+class Member {
+
+  constructor(memberID, memberNickName, sayOneThing, memberImageUrl, roles, skills) {
+    this.memberID = memberID;
+    this.memberNickName = memberNickName;
+    this.sayOneThing = sayOneThing;
+    this.memberImageUrl = memberImageUrl;
+    this.roles = roles;
+    this.skills = skills;
+  }
 }
 </script>
 
