@@ -11,7 +11,7 @@
     </select>
 <!--    v-show 라는 옵션도 있음
 v-show는 렌더링은 하지만 보여주지 않을뿐
-v-if는 렌더링 했지만 보여주지 않을뿐
+v-if는 렌더링 할지말지
 화면에 자주 보이고 안보이고 한다면 v-show를 써서 렌더링 횟수를 줄여주는게 좋음.-->
     <table class="table-bordered" v-if="tableShow">
       <!--  d => data, i => index    -->
