@@ -1,42 +1,45 @@
 <template>
   <div id="member">
-      <b-card :key="index" :value="member.memberID"  v-for="(member,index) in members"
-              title="d.memberNickName"
-              img-src="d.memberImageUrl"
-              img-alt="Image"
-              img-top
-              tag="article"
-              style="max-width: 20rem;"
-              class="mb-2"
-      >
-        <b-card-text>
-          Some quick example text to build on the card title and make up the bulk of the card's content.
-        </b-card-text>
+    <b-card :key="index" :value="member" v-for="(member,index) in members"
+            v-bind:title="member.memberNickName"
+            v-bind:img-src="member.memberImageUrl"
+            img-alt="Image"
+            img-top
+            tag="article"
+            style="max-width: 25rem; float:left; margin-right: 10px"
+            class="mb-2"
 
-        <b-button href="#" variant="primary">Go somewhere</b-button>
-      </b-card>
+    >
+      <b-card-text>
+        <strong>{{ member.sayOneThing }}</strong>
+      </b-card-text>
+      <h3><strong>기술 스택</strong></h3>
+      <h4 :key="skill" :value="member" v-for="skill in member.skills">{{skill}}</h4>
+      <b-button href="#" variant="primary">깃허브 보러가기</b-button>
+    </b-card>
 
   </div>
 </template>
 
 <script>
 import * as member from "@/api/member";
+
 export default {
   name: "Member.vue",
-  data(){
+  data() {
     return {
       members: []
     };
   },
-  methods:{
-    getData(){
+  methods: {
+    getData() {
       member.getMembers().then(response => {
         console.log(response.data);
-        this.members.push(response.data);
+        // this.members.push(response.data);
         console.log(response.data.length);
-        for(let i = 0; i < response.data.length; i++){
-          this.members.push(JSON.stringify(response.data[i]));
-          console.log(this.members)
+        for (let i = 0; i < response.data.length; i++) {
+          this.members.push(response.data[i]);
+          console.log(response.data[i]);
         }
         // this.members = response.data;
       }).catch(error => {
@@ -48,6 +51,7 @@ export default {
     this.getData();
   },
 }
+
 // eslint-disable-next-line no-unused-vars
 class Member {
 
@@ -63,7 +67,7 @@ class Member {
 </script>
 
 <style scoped>
-#member{
+#member {
   margin: 10px;
 }
 </style>
